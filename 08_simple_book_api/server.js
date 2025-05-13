@@ -6,8 +6,8 @@ app.use(express.json()); // Middleware to parse JSON data
 
 // In-memory book collection
 let books = [
-    { id: 1, title: "The Hobbit", author: "J.R.R. Tolkien" },
-    { id: 2, title: "1984", author: "George Orwell" },
+    { id: 1, title: "Rich Dad, Poor Dad", author: "Robert Kiyosaki" },
+    { id: 2, title: "What Every Body is Saying", author: "Joe Navarro" },
     { id: 3, title: "To Kill a Mockingbird", author: "Harper Lee" }
 ];
 
