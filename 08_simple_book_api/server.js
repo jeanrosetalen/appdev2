@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const port = process.env.PORT || 3000
-const bookRoutes = require('./src/routes/bookRoutes');
+const bookRoutes = require('./routes/bookRoutes');
 
 const app = express();
 app.use(express.json()); // Middleware for parsing JSON
