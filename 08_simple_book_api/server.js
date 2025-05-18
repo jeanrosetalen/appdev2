@@ -1,5 +1,6 @@
 const express = require("express");
 const bookRouter = require("./src/routers/bookRouter");
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
