@@ -6,6 +6,7 @@ const {
   updateBook,
   deleteBook,
 } = require("../controllers/bookController");
+
 const router = express.Router();
 
 router.get("/", getAllBooks);
