@@ -1,4 +1,5 @@
 const Book = require("../models/bookModel");
+const transporter = require("../middlewares/emailMiddleware");
 
 // Get All Books
 const getAllBooks = async (req, res) => {
@@ -75,10 +76,47 @@ const deleteBook = async (req, res) => {
   }
 };
 
+// post reserve book
+const reserveBook = (req, res) => {
+  const { to, subject, text } = req.body;
+  const { email: from } = req.user;
+
+  const mailOptions = {
+    from: from,
+    to: to,
+    subject: subject,
+    text: text,
+  };
+
+  try {
+    // Send the email
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        res.status(500).json({
+          success: false,
+          message: error,
+        });
+      } else {
+        res.status(200).json({
+          success: true,
+          message: "Email Sent",
+        });
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
 module.exports = {
   getAllBooks,
   getBookById,
   createBook,
   updateBook,
   deleteBook,
+  reserveBook,
 };
