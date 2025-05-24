@@ -13,6 +13,7 @@ const getAllBooks = async (req, res) => {
   }
 };
 
+
 // Get book by Id
 const getBookById = async (req, res) => {
   const { id } = req.params;
@@ -28,6 +29,7 @@ const getBookById = async (req, res) => {
     });
   }
 };
+
 
 // Add or create book
 const createBook = async (req, res) => {
