@@ -12,6 +12,10 @@ const users = [
   },
 ];
 
+const path = require('path')
+const pug = require('pug')
+
+
 const signIn = async (req, res) => {
   const { email, password } = req.body;
 
@@ -80,6 +84,10 @@ const signUp = async (req, res) => {
   };
 
   users.push(newUser);
+
+  const templatePath = path.join(__dirname, "../views", "welcome.pug");
+  console.log(templatePath)
+
   return res.status(201).json({
     status: true,
     message: "Account has been created!",
