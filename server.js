@@ -5,7 +5,9 @@ const mongoose = require("mongoose");
 
 const app = express();
 app.use(express.json()); // Middleware for parsing JSON
-const router = require("./router/book.route");
+const authRoutes = require("./router/auth.route");
+const bookRoutes = require("./router/book.route");
+
 
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI;
@@ -16,17 +18,13 @@ app.get("/", (req, res) => {
   res.send("Simple Book API using Node.js and Express");
 });
 
+app.use("/api/auth", authRoutes);
+app.use("/api/books", bookRoutes);
+
+
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
-
-// MongoDB Connection
-mongoose.connect(MONGO_URI)
-  .then(() => console.log("MongoDB Connected!"))
-  .catch(error => console.error("MongoDB connection error:", error));
-
-
-
 
 

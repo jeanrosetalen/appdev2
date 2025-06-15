@@ -1,6 +1,7 @@
 const express = require("express");
 const Book = require("../models/book.model");
 const authMiddleware = require("../middlewares/auth.middleware");
+const sendEmailNotification = require("../middlewares/email.middleware")
 
 
 const router = express.Router();
@@ -28,9 +29,17 @@ router.post("/", authMiddleware, async (req, res) => {
     const { title, author } = req.body;
     if (!title || !author) return res.status(400).json({ message: "Title and Author are required" });
 
-    const newBook = new Book({ title, author });
-    await newBook.save();
-    res.status(201).json(newBook);
+    try {
+        const newBook = new Book({ title, author });
+        await newBook.save();
+
+        // Send email notification
+        await sendEmailNotification(newBook);
+
+        res.status(201).json(newBook);
+    } catch (error){
+        res.status(500).json({ message: error.message });
+    }
 
 });
 
