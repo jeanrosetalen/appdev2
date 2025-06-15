@@ -1,18 +1,18 @@
 const express = require("express");
-const bookRouter = require("./src/routers/bookRouter");
-require('dotenv').config();
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use("/api/books", bookRouter);
+app.use(express.json()); // Middleware for parsing JSON
+const books = require("./router/book.route")
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
+// Welcome Route
 app.get("/", (req, res) => {
   res.send("Simple Book API using Node.js and Express");
 });
 
+// Start Server
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
+
